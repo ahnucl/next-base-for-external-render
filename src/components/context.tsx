@@ -29,7 +29,8 @@ export function FacialRecognitionProvider({ children }: FacialRecognitionProvide
       
       <Script 
         async 
-        src="http://localhost:8080/assets/main-c6aa2ead.js" 
+        // src="http://localhost:8080/assets/main-c6aa2ead.js" 
+        src="http://localhost:8080/assets/main-0221ac86.js" 
         type="module" 
         strategy="lazyOnload"
       />

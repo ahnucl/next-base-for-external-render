@@ -2,7 +2,7 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { useFacialRecognition } from './context';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 declare global {
   interface Window {
@@ -14,13 +14,13 @@ declare global {
 export function FacialRecognitionModal() {
   const { isOpen, onOpen, onClose } = useFacialRecognition()
  
-  const ref = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     const observer = new MutationObserver(() => {
       if (document.getElementById('widget-root')) {
         console.log('observer hit')
-        window.renderWidget({})
+        window.renderWidget({
+          name: 'Abriu no observer'
+        })
         observer.disconnect()
       }
     })
@@ -28,7 +28,9 @@ export function FacialRecognitionModal() {
     if (isOpen) {
       if (document.getElementById('widget-root')) {
         console.log('div hit')
-        window.renderWidget({})
+        window.renderWidget({
+          name: 'Abriu de primeira'
+        }) // O chatListId vai ser obtido ou pela chamada a essa função ou via search params
         return
       }
       console.log('div miss')
@@ -53,7 +55,7 @@ export function FacialRecognitionModal() {
     <Dialog.Portal>
       <Dialog.Overlay className="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0" />
       <Dialog.Content className="data-[state=open]:animate-contentShow fixed w-[80vw] h-[80vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] focus:outline-none">
-        <div ref={ref} id="widget-root" ></div>
+        <div id="widget-root" ></div>
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>
